@@ -2,17 +2,17 @@ const facilities = [
   {
     name: '서울 정수장',
     location: { lat: 37.5665, lon: 126.9780 },
-    equipment: ['펌프', '여과기', '제어반']
+    equipment: ['염산 보관', '가성소다 저장', '고압가스 저장']
   },
   {
     name: '부산 정수장',
     location: { lat: 35.1796, lon: 129.0756 },
-    equipment: ['유량계', '정수기', '압력센서']
+    equipment: ['황산 저장', '디젤 연료탱크', '인화성 물질 창고']
   },
   {
     name: '대전 정수장',
     location: { lat: 36.3504, lon: 127.3845 },
-    equipment: ['모터', '센서', '필터']
+    equipment: ['유해화학물질 보관소', '위험물 저장탱크', '독성가스 감지기']
   }
 ];
 
@@ -52,38 +52,8 @@ function displayEquipment(equipment) {
   });
 }
 
-function goToFacility(name) {
-  const encoded = encodeURIComponent(name);
-  window.location.href = `facility.html?name=${encoded}`;
-}
-
-function showLocationInfo(lat, lon, facility) {
-  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      const address = data.display_name || '알 수 없는 위치';
-      document.getElementById('location').innerHTML = `
-        현재 위치: ${address}<br>
-        가장 가까운 시설: 
-        <span class="facility-link" onclick="goToFacility('${facility.name}')">
-          ${facility.name}
-        </span> (${facility.distance} km)
-      `;
-    })
-    .catch(() => {
-      document.getElementById('location').innerHTML = `
-        가장 가까운 시설: 
-        <span class="facility-link" onclick="goToFacility('${facility.name}')">
-          ${facility.name}
-        </span> (${facility.distance} km)
-      `;
-    });
-}
-
 function searchFacility() {
-  document.getElementById('location').textContent = '위치 정보를 불러오는 중...';
+  document.getElementById('location').textContent = '위치 정보를 가져오는 중...';
   document.getElementById('equipment-list').innerHTML = '';
 
   navigator.geolocation.getCurrentPosition(
@@ -93,7 +63,9 @@ function searchFacility() {
       const nearest = findNearestFacility(lat, lon);
 
       if (nearest) {
-        showLocationInfo(lat, lon, nearest);
+        document.getElementById('location').innerHTML = `
+          가장 가까운 시설: <strong>${nearest.name}</strong> (${nearest.distance} km)
+        `;
         displayEquipment(nearest.equipment);
       } else {
         document.getElementById('location').textContent = '근처 시설을 찾을 수 없습니다.';
@@ -105,14 +77,5 @@ function searchFacility() {
   );
 }
 
-// 버튼 이벤트
-document.getElementById('retry-btn').addEventListener('click', searchFacility);
-document.getElementById('emergency-btn').addEventListener('click', () => {
-  alert('119에 신고되었습니다.');
-});
-document.getElementById('police-btn').addEventListener('click', () => {
-  alert('112에 신고되었습니다.');
-});
-
-// 최초 실행
+// 실행
 searchFacility();
