@@ -1,27 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+body, html {
   margin: 0;
   padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
 }
 
 .container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 40px 20px;
 }
 
 h1 {
-  text-align: center;
-  color: #2c3e50;
+  margin-bottom: 20px;
 }
 
-h2 {
-  margin-top: 20px;
+#location {
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 ul {
@@ -30,30 +26,22 @@ ul {
 }
 
 li {
-  margin: 10px 0;
+  margin: 5px 0;
+}
+
+.button-group {
+  margin-top: 30px;
 }
 
 button {
-  border: none;
-  padding: 20px 40px;
-  margin: 20px;
+  margin: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
-  transform: scale(1.1);
-}
-
-#emergency-btn {
-  background-color: #e74c3c; /* 빨간색 */
-  color: white;
-}
-
-#police-btn {
-  background-color: #3498db; /* 파란색 */
-  color: white;
+.facility-link {
+  color: #007BFF;
+  text-decoration: underline;
+  cursor: pointer;
 }
