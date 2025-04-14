@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kwater Tech 긴급 신고 시스템</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Kwater Tech 긴급 신고 시스템</h1>
-
     <p id="location">위치 정보를 가져오는 중...</p>
 
     <h2>설비물 정보</h2>
     <ul id="equipment-list"></ul>
 
     <div class="button-group">
-      <button id="retry-btn">다시 시도</button>
-      <button id="emergency-btn">119 신고</button>
-      <button id="police-btn">112 신고</button>
+      <button id="emergency-btn" class="red">119 신고</button>
+      <button id="police-btn" class="blue">112 신고</button>
     </div>
   </div>
 
