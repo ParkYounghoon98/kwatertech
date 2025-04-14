@@ -1,47 +1,65 @@
-body, html {
+body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #f7f9fc;
+  font-family: 'Arial', sans-serif;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
 
 .container {
-  text-align: center;
-  padding: 40px 20px;
+  max-width: 600px;
+  width: 90%;
 }
 
 h1 {
+  color: #2c3e50;
   margin-bottom: 20px;
 }
 
 #location {
-  font-size: 18px;
   margin-bottom: 15px;
+  color: #555;
 }
 
-ul {
-  list-style-type: none;
+h2 {
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+#equipment-list {
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-li {
+#equipment-list li {
   margin: 5px 0;
 }
 
 .button-group {
-  margin-top: 30px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 button {
-  margin: 8px;
-  padding: 12px 20px;
+  padding: 10px 20px;
   font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  color: white;
   cursor: pointer;
 }
 
-.facility-link {
-  color: #007BFF;
-  text-decoration: underline;
-  cursor: pointer;
+.red {
+  background-color: #e74c3c;
+}
+
+.blue {
+  background-color: #3498db;
 }
