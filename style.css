@@ -1,59 +1,59 @@
-/* 기본 설정 */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #ffffff; /* 배경을 하얀색으로 변경 */
+  padding: 20px;
+  background-color: #ffffff;
   color: #333;
-  text-align: center; /* 모든 내용을 가운데 정렬 */
+  text-align: center;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-}
-
-h1, h2 {
-  text-align: center;
-  color: #333;
 }
 
 h1 {
-  margin-bottom: 30px;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  word-break: keep-all;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: center; /* 건물명 리스트도 가운데 정렬 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.4rem;
+  }
 }
 
-li {
+#location,
+h2,
+#equipment-list,
+img {
+  text-align: center;
+  margin: 0 auto;
+}
+
+#equipment-list li {
+  list-style: none;
   font-size: 18px;
-  color: #555;
-  margin: 5px 0;
+  font-weight: bold;
 }
 
-/* 유해화학물질 정보 테이블 스타일 */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 th, td {
-  border: 1px solid #ccc;
   padding: 12px;
-  text-align: center;
-  font-size: 16px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 th {
-  background: linear-gradient(135deg, #f7f7f7, #e0e0e0);
-  color: #333;
+  background-color: #f2f2f2;
   font-weight: bold;
 }
 
@@ -72,44 +72,35 @@ th {
   color: #155724;
 }
 
-/* 신고 버튼 스타일 */
 button {
-  padding: 15px 30px;
-  font-size: 18px;
-  cursor: pointer;
+  font-size: 20px;
+  padding: 16px 32px;
   border: none;
-  border-radius: 5px;
-  margin: 10px;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  margin: 20px 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #emergency-btn {
-  background-color: #f44336;
+  background-color: #e53935;
   color: white;
-  width: 200px;
 }
 
 #police-btn {
-  background-color: #2196F3;
+  background-color: #1e88e5;
   color: white;
-  width: 200px;
 }
 
-button:hover {
-  transform: scale(1.15);
-  opacity: 0.9;
+button:hover,
+button:active {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* 반응형 디자인 개선 */
-@media (max-width: 768px) {
-  td, th {
-    padding: 8px;
-    font-size: 14px;
-  }
-
-  button {
-    width: 180px;
-    padding: 12px 24px;
-    font-size: 16px;
-  }
+img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  margin-top: 10px;
 }
