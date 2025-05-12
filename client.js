@@ -1,40 +1,77 @@
-// 위치 정보를 가져오는 예시 (Geolocation API 사용)
+// 위치 정보 가져오기
 navigator.geolocation.getCurrentPosition(function(position) {
   const userLat = position.coords.latitude;
   const userLon = position.coords.longitude;
 
-  // 위치 정보 페이지에 표시
-  document.getElementById('location').textContent = `위도: ${userLat}, 경도: ${userLon}`;
-}, function(error) {
-  if (error.code === error.PERMISSION_DENIED) {
-    document.getElementById('location').textContent = '위치 정보에 대한 접근이 거부되었습니다.';
+  getLocationName(userLat, userLon);
+
+  const nearestFacility = findNearestFacility(userLat, userLon);
+  if (nearestFacility) {
+    document.getElementById('location').textContent = `위치 ${nearestFacility.name} (${nearestFacility.location.lat}, ${nearestFacility.location.lon})`;
+    displayEquipment(nearestFacility.equipment);
   } else {
-    document.getElementById('location').textContent = '위치 정보를 가져오는 데 실패했습니다.';
+    document.getElementById('location').textContent = '근처에 시설을 찾을 수 없습니다.';
   }
+}, function(error) {
+  document.getElementById('location').textContent = '위치 정보를 가져올 수 없습니다.';
 });
 
-// 긴급 신고 버튼 클릭 시 이벤트
-document.getElementById('emergency-btn').addEventListener('click', function() {
-  window.location.href = "tel:119"; // 119 전화 걸기
-});
+// 위치 이름 가져오기 (Nominatim)
+function getLocationName(lat, lon) {
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`;
 
-document.getElementById('police-btn').addEventListener('click', function() {
-  window.location.href = "tel:112"; // 112 전화 걸기
-});
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const locationName = data.display_name;
+      document.getElementById('location').textContent = `위치 ${locationName} (위도 ${lat}, 경도 ${lon})`;
+    })
+    .catch(() => {
+      document.getElementById('location').textContent = '위치 정보를 가져올 수 없습니다.';
+    });
+}
 
-// 유해 화학 물질 추가 폼 처리
-document.getElementById('chemical-form').addEventListener('submit', function(event) {
-  event.preventDefault();
-  const name = document.getElementById('chemical-name').value;
-  const content = document.getElementById('chemical-content').value;
-  const inflame = document.getElementById('chemical-inflame').value;
-  const explosion = document.getElementById('chemical-explosion').value;
-  const volume = document.getElementById('chemical-volume').value;
+// 거리 계산
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
 
-  const newChemical = `
-    <li>
-      <strong>${name}</strong>: 함유량: ${content}, 인화점: ${inflame}, 폭발 범위: ${explosion}, 용량: ${volume}
-    </li>
-  `;
-  document.getElementById('hazardous-chemicals-list').innerHTML += newChemical;
-});
+// 가장 가까운 시설 찾기
+function findNearestFacility(userLat, userLon) {
+  const facilities = [
+    {
+      name: '약품투입동',
+      location: { lat: 37.5665, lon: 126.9780 },
+      equipment: ['차염탱크', '수산화칼슘 보관함']
+    }
+  ];
+
+  let nearestFacility = null;
+  let minDistance = Infinity;
+
+  facilities.forEach(facility => {
+    const distance = getDistance(userLat, userLon, facility.location.lat, facility.location.lon);
+    if (distance < minDistance) {
+      nearestFacility = facility;
+      minDistance = distance;
+    }
+  });
+
+  return nearestFacility;
+}
+
+// 설비 표시
+function displayEquipment(equipment) {
+  const list = document.getElementById('equipment-list');
+  list.innerHTML = '';
+  equipment.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
