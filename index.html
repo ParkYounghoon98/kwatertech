@@ -1,73 +1,65 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>K-water Tech 긴급 신고 시스템</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kwater Tech 긴급 신고 시스템</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* styles.css 내용 여기에 포함 */
+  </style>
 </head>
 <body>
-<!-- test -->
   <div class="container">
-    <!-- 상단 텍스트 -->
-    <h1>K-water Tech 긴급 신고 시스템</h1>
+    <h1>Kwater Tech 긴급 신고 시스템</h1>
 
-    <!-- 119 신고 버튼과 112 신고 버튼 -->
-    <div class="button-container">
-      <button id="emergency-btn"><i class="fas fa-fire-extinguisher"></i> 119 신고</button>
-      <button id="police-btn"><i class="fas fa-car-police"></i> 112 신고</button>
-    </div>
+    <p id="location">위치 정보를 가져오는 중...</p>
 
-    <!-- 설비물 정보 -->
-    <h2>설비물 정보</h2>
-    <div id="facility-info">
-      <p>OOO 건물 (예시) - 설비물 정보는 여기에 표시됩니다.</p>
-    </div>
-
-    <!-- 피난 안내도 -->
-    <h2>피난 안내도</h2>
-    <img src="evacuation-map.jpg" alt="피난 안내도" id="evacuation-map" />
-
-    <!-- 소화기 위치 -->
-    <h2>소화기 위치</h2>
-    <div id="fire-extinguisher-locations">
-      <ul>
-        <li>1층: 출입구 옆</li>
-        <li>2층: 복도 중간</li>
-        <li>3층: 주방 근처</li>
-      </ul>
-    </div>
-
-    <!-- 유해 화학 물질 정보 -->
-    <h2>유해 화학 물질 정보</h2>
-    <ul id="hazardous-chemicals-list">
-      <li><strong>차염</strong>: 함유량: 50%, 인화점: 300°C, 폭발 범위: 5-10%, 용량: 10L</li>
-      <li><strong>수산화칼슘</strong>: 함유량: 40%, 인화점: 0°C, 폭발 범위: 0-3%, 용량: 20L</li>
+    <h2>건물명</h2>
+    <ul id="equipment-list">
+      <li>약품투입동 (예시)</li>
     </ul>
 
-    <!-- 유해 화학 물질 추가 폼 -->
-    <h2>새로운 유해 화학 물질 추가</h2>
-    <form id="chemical-form">
-      <label for="chemical-name">물질명</label>
-      <input type="text" id="chemical-name" required>
+    <h2>비상 대피로 및 소화전 위치</h2>
+    <img src="https://via.placeholder.com/600x400?text=%EB%B9%84%EC%83%81+%EB%8C%80%ED%94%BC%EB%A1%9C+%26+%EC%86%8C%ED%99%94%EC%A0%84+%EC%9C%84%EC%B9%98" 
+         alt="비상 대피로 및 소화전 위치 (예시)" 
+         style="width:100%; max-width:600px; border-radius: 8px; margin-top: 10px;">
 
-      <label for="chemical-content">함유량</label>
-      <input type="text" id="chemical-content" required>
+    <h2>유해화학물질 정보</h2>
+    <table id="chemical-table">
+      <thead>
+        <tr>
+          <th data-col="name">물질명</th>
+          <th data-col="content">함유량</th>
+          <th data-col="flashPoint">인화점</th>
+          <th data-col="range">폭발 범위</th>
+          <th data-col="volume">용량</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>차염</td>
+          <td>50%</td>
+          <td>300°C</td>
+          <td>5-10%</td>
+          <td>10L</td>
+        </tr>
+        <tr>
+          <td>수산화칼슘</td>
+          <td>40%</td>
+          <td>0°C</td>
+          <td>0-3%</td>
+          <td>20L</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <label for="chemical-inflame">인화점</label>
-      <input type="text" id="chemical-inflame" required>
-
-      <label for="chemical-explosion">폭발 범위</label>
-      <input type="text" id="chemical-explosion" required>
-
-      <label for="chemical-volume">용량</label>
-      <input type="text" id="chemical-volume" required>
-
-      <button type="submit">유해 화학 물질 추가</button>
-    </form>
+    <div style="text-align: center;">
+      <button id="emergency-btn">119 신고</button>
+      <button id="police-btn">112 신고</button>
+    </div>
   </div>
-
+  
   <script src="client.js"></script>
 </body>
 </html>
